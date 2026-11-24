@@ -1,0 +1,7 @@
+# Only the part relevant to this project. If you already have a config.toml
+# from `supabase init`, add this block to it.
+
+[functions.register]
+# The public form has no login, so the function does its own checks
+# (allowed origins, validation, rate limit) instead of requiring a JWT.
+verify_jwt = false
