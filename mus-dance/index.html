@@ -9,7 +9,7 @@
   <!-- ===== Copy these into the host page's <head> ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800;1,900&family=Oswald:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap">
   <link rel="stylesheet" href="iidmf.css">
   <style>.iidmf-demo-body{margin:0}</style> <!-- demo page only, do not copy -->
   <!-- ===== end ===== -->
@@ -25,36 +25,46 @@
 
   <!-- ================= HERO ================= -->
   <header class="iidmf-hero" id="iidmf-top">
+    <svg class="iidmf-splash iidmf-splash--l" viewBox="0 0 240 260" aria-hidden="true" focusable="false">
+      <path fill="#f72973" d="M0 0h74v38c0 13-7 21-15 21s-14-7-14-19v-5c0-6-4-10-9-10s-9 4-9 10v60c0 10-6 17-12 17S0 105 0 95z"/>
+      <path fill="#1577fc" d="M112 0h70c-3 9 5 17 15 14 11-3 20 3 18 13-2 9-12 11-20 9-9-2-15 6-11 14 5 10 1 19-8 19-10 0-13-8-15-16-2-9-10-13-18-9-9 4-17 1-17-9 0-8 9-13 5-21-4-9-1-11-1-14z"/>
+      <rect x="16" y="128" width="64" height="58" rx="17" fill="#fed507" transform="rotate(-10 48 157)"/>
+      <circle cx="48" cy="157" r="12" fill="#f72973"/>
+      <circle cx="116" cy="74" r="13" fill="#fed507"/>
+      <rect x="0" y="212" width="32" height="32" rx="9" fill="#f72973"/>
+      <rect x="152" y="96" width="26" height="40" rx="12" fill="#fed507" transform="rotate(24 165 116)"/>
+    </svg>
+    <svg class="iidmf-splash iidmf-splash--r" viewBox="0 0 240 260" aria-hidden="true" focusable="false">
+      <path fill="#f72973" d="M0 0h74v38c0 13-7 21-15 21s-14-7-14-19v-5c0-6-4-10-9-10s-9 4-9 10v60c0 10-6 17-12 17S0 105 0 95z"/>
+      <path fill="#1577fc" d="M112 0h70c-3 9 5 17 15 14 11-3 20 3 18 13-2 9-12 11-20 9-9-2-15 6-11 14 5 10 1 19-8 19-10 0-13-8-15-16-2-9-10-13-18-9-9 4-17 1-17-9 0-8 9-13 5-21-4-9-1-11-1-14z"/>
+      <rect x="16" y="128" width="64" height="58" rx="17" fill="#fed507" transform="rotate(-10 48 157)"/>
+      <circle cx="48" cy="157" r="12" fill="#f72973"/>
+      <circle cx="116" cy="74" r="13" fill="#fed507"/>
+      <rect x="0" y="212" width="32" height="32" rx="9" fill="#f72973"/>
+      <rect x="152" y="96" width="26" height="40" rx="12" fill="#fed507" transform="rotate(24 165 116)"/>
+    </svg>
     <div class="iidmf-hero__head">
       <img class="iidmf-hero__logo" src="assets/iccr-logo-white.png" width="360" height="198" alt="Government of India, Indian Council for Cultural Relations (ICCR)">
       <p class="iidmf-hero__org">Indian Council for Cultural Relations</p>
       <p class="iidmf-hero__presents"><span>presents</span></p>
       <h1 class="iidmf-title">
         <span class="iidmf-title__top"><span class="iidmf-title__num">12<sup>th</sup></span> <span class="iidmf-title__intl">India <br>International</span></span>
-        <span class="iidmf-title__dm"><span class="iidmf-burst iidmf-burst--l" aria-hidden="true"></span>Dance <span class="iidmf-title__amp">&amp;</span><span class="iidmf-burst iidmf-burst--r" aria-hidden="true"></span><br>Music</span>
+        <span class="iidmf-title__dance">Dance</span>
+        <span class="iidmf-title__and"><span class="iidmf-burst iidmf-burst--l" aria-hidden="true"></span>and<span class="iidmf-burst iidmf-burst--r" aria-hidden="true"></span></span>
+        <span class="iidmf-title__music">Music</span>
         <span class="iidmf-title__fest">Festival</span>
       </h1>
       <div class="iidmf-hero__actions">
         <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register here</a>
-        <a class="iidmf-btn iidmf-btn--purple" href="#iidmf-programme">Programme details</a>
-        <a class="iidmf-btn iidmf-btn--white iidmf-hero__directions" href="https://www.google.com/maps/search/?api=1&amp;query=Central+Park+Connaught+Place+New+Delhi" target="_blank" rel="noopener">Get directions to venue<span class="iidmf-sr"> (opens Google Maps in a new tab)</span></a>
+        <a class="iidmf-btn iidmf-btn--sun" href="#iidmf-programme">Programme details</a>
       </div>
     </div>
-    <img class="iidmf-hero__art"
-         src="assets/hero-performers-1600.jpg"
-         srcset="assets/hero-performers-900.jpg 900w, assets/hero-performers-1600.jpg 1600w"
-         sizes="(max-width: 80rem) 100vw, 80rem"
-         width="1600" height="866"
-         alt="Illustration of performers from around the world in traditional dress, playing drums and string instruments and singing together on a decorated boat, with India Gate behind them.">
-  </header>
 
-  <!-- ================= DATES / TIME / VENUE ================= -->
-  <section class="iidmf-band" aria-label="Dates, time and venue">
-    <div class="iidmf-wrap">
+    <div class="iidmf-wrap iidmf-hero__info" aria-label="Dates, time and venue">
       <ul class="iidmf-pills">
         <li class="iidmf-pill">
           <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg>
-          <span><strong>4, 5 &amp; 6</strong> December 2026</span>
+          <span><strong>4<sup>th</sup>, 5<sup>th</sup> &amp; 6<sup>th</sup></strong> December 2026</span>
         </li>
         <li class="iidmf-pill">
           <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-clock"/></svg>
@@ -65,33 +75,31 @@
           <span><strong>Central Park,</strong> Connaught Place, New Delhi</span>
         </li>
       </ul>
-
-      <div class="iidmf-band__row">
-        <div class="iidmf-band__text">
-          <p class="iidmf-band__tagline">Three evenings of dance and music from around the world.</p>
-          <p class="iidmf-band__lede">This December, make an evening of it at Central Park. Join us in the heart of New Delhi for live performances by dancers, musicians and ensembles from around the world.</p>
-          <a class="iidmf-btn iidmf-btn--outline iidmf-band__directions" href="https://www.google.com/maps/search/?api=1&amp;query=Central+Park+Connaught+Place+New+Delhi" target="_blank" rel="noopener">Get directions to venue<span class="iidmf-sr"> (opens Google Maps in a new tab)</span></a>
-          <p class="iidmf-band__note">Register to get your invite. Entry is free for all.</p>
-        </div>
-        <svg class="iidmf-free" viewBox="0 0 200 200" role="img" aria-label="Free entry">
-          <path fill="#e5097f" d="M187.80 100.00A13.28 13.28 0 0 1 184.24 124.74A13.28 13.28 0 0 1 173.86 147.47A13.28 13.28 0 0 1 157.50 166.35A13.28 13.28 0 0 1 136.47 179.87A13.28 13.28 0 0 1 112.50 186.91A13.28 13.28 0 0 1 87.50 186.91A13.28 13.28 0 0 1 63.53 179.87A13.28 13.28 0 0 1 42.50 166.35A13.28 13.28 0 0 1 26.14 147.47A13.28 13.28 0 0 1 15.76 124.74A13.28 13.28 0 0 1 12.20 100.00A13.28 13.28 0 0 1 15.76 75.26A13.28 13.28 0 0 1 26.14 52.53A13.28 13.28 0 0 1 42.50 33.65A13.28 13.28 0 0 1 63.53 20.13A13.28 13.28 0 0 1 87.50 13.09A13.28 13.28 0 0 1 112.50 13.09A13.28 13.28 0 0 1 136.47 20.13A13.28 13.28 0 0 1 157.50 33.65A13.28 13.28 0 0 1 173.86 52.53A13.28 13.28 0 0 1 184.24 75.26A13.28 13.28 0 0 1 187.80 100.00Z"/>
+      <svg class="iidmf-free" viewBox="0 0 200 200" role="img" aria-label="Free entry for all">
+          <path fill="#f72973" d="M187.80 100.00A13.28 13.28 0 0 1 184.24 124.74A13.28 13.28 0 0 1 173.86 147.47A13.28 13.28 0 0 1 157.50 166.35A13.28 13.28 0 0 1 136.47 179.87A13.28 13.28 0 0 1 112.50 186.91A13.28 13.28 0 0 1 87.50 186.91A13.28 13.28 0 0 1 63.53 179.87A13.28 13.28 0 0 1 42.50 166.35A13.28 13.28 0 0 1 26.14 147.47A13.28 13.28 0 0 1 15.76 124.74A13.28 13.28 0 0 1 12.20 100.00A13.28 13.28 0 0 1 15.76 75.26A13.28 13.28 0 0 1 26.14 52.53A13.28 13.28 0 0 1 42.50 33.65A13.28 13.28 0 0 1 63.53 20.13A13.28 13.28 0 0 1 87.50 13.09A13.28 13.28 0 0 1 112.50 13.09A13.28 13.28 0 0 1 136.47 20.13A13.28 13.28 0 0 1 157.50 33.65A13.28 13.28 0 0 1 173.86 52.53A13.28 13.28 0 0 1 184.24 75.26A13.28 13.28 0 0 1 187.80 100.00Z"/>
           <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="0.1 9" stroke-linecap="round"/>
-          <circle cx="100" cy="100" r="68" fill="#ff6a1a"/>
-          <text x="100" y="96" text-anchor="middle">FREE</text>
-          <text x="100" y="128" text-anchor="middle">ENTRY</text>
+          <circle cx="100" cy="100" r="68" fill="#fed507"/>
+          <text x="100" y="88" text-anchor="middle">FREE</text>
+          <text x="100" y="119" text-anchor="middle">ENTRY</text>
+          <text class="iidmf-free__small" x="100" y="143" text-anchor="middle">FOR ALL</text>
         </svg>
-      </div>
     </div>
-  </section>
 
-  <!-- ================= ABOUT ================= -->
-  <section class="iidmf-section iidmf-about" id="iidmf-about" aria-labelledby="iidmf-about-h">
-    <div class="iidmf-wrap iidmf-narrow">
-      <h2 class="iidmf-h2" id="iidmf-about-h">Three evenings of dance and music in the heart of New Delhi</h2>
-      <span class="iidmf-ornament" aria-hidden="true"></span>
-      <p>This December, Central Park in Connaught Place becomes an open-air stage for the <strong>12th India International Dance &amp; Music Festival</strong>. Over three evenings, dancers, musicians, and ensembles from around the world will share the traditions they grew up with and the new directions they’re taking them.</p>
-      <p>A story from Krishna’s childhood finds a new setting in a Balinese dance drama. The beat of the Maldivian boduberu drum carries original songs in Dhivehi. Welsh folk tunes take on a different sound through fiddle, voice and live looping. Each performance offers a chance to hear a familiar story told differently or discover a sound you’re hearing for the first time.</p>
-      <p>Join us at <strong>Central Park, Connaught Place, from 4 to 6 December 2026, from 5:30 PM onwards each evening</strong>.</p>
+    <img class="iidmf-hero__figures"
+         src="assets/dancing-figures-1978.webp"
+         srcset="assets/dancing-figures-1000.webp 1000w, assets/dancing-figures-1978.webp 1978w"
+         sizes="(max-width: 62rem) 100vw, 62rem"
+         width="1978" height="236"
+         alt="Illustrated row of dancers and musicians playing drums, guitars, a violin and other instruments">
+  </header>
+
+  <!-- ================= INTRO ================= -->
+  <section class="iidmf-band" id="iidmf-about" aria-labelledby="iidmf-intro-h">
+    <div class="iidmf-wrap iidmf-band__text">
+      <h2 class="iidmf-band__h" id="iidmf-intro-h">13 Countries. Meet 150+ International Artists!</h2>
+      <p class="iidmf-band__lede">Get ready for the 12th India International Dance &amp; Music Festival, presented by the Indian Council for Cultural Relations (ICCR), bringing together the diverse dance and musical traditions of 13 countries on one stage.</p>
+      <p class="iidmf-band__lede">From an enchanting Balinese dance-drama reimagining the childhood of Lord Krishna and Setswana-Bollywood fusion to Sri Lankan folk traditions, Georgian polyphony, live-looped Welsh folk music and the vibrant beats of Maldivian Boduberu, witness extraordinary dance and music come alive on one stage. Every performance invites you to witness heritage in motion and discover sounds you’ve never heard before.</p>
+      <p class="iidmf-band__cta"><span>To get an invite,</span> <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register here</a></p>
     </div>
   </section>
 
@@ -99,10 +107,7 @@
   <section class="iidmf-section iidmf-countries" id="iidmf-countries" aria-labelledby="iidmf-countries-h">
     <div class="iidmf-wrap">
       <div class="iidmf-countries__head">
-        <div class="iidmf-narrow iidmf-narrow--left">
-          <h2 class="iidmf-h2" id="iidmf-countries-h">Participating countries</h2>
-          <p>From the interwoven voices of a Georgian choir to the rhythm of a Maldivian drum, each performance has its own sound, story, or style. Get to know the artists and traditions coming to Central Park.</p>
-        </div>
+        <h2 class="iidmf-h2" id="iidmf-countries-h">Participating countries</h2>
         <div class="iidmf-countries__controls">
           <button type="button" class="iidmf-round" data-iidmf-prev aria-label="Previous country">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
@@ -171,7 +176,7 @@
         <div class="iidmf-country__media" data-photos="assets/countries/uk-1.jpg, assets/countries/uk-2.jpg, assets/countries/uk-3.jpg" data-alt="Meriel Paget and ensemble performing" data-character="assets/characters/character-uk-guitarist.webp" data-character-alt="Illustration: a British musician in a suit and hat, playing an acoustic guitar"></div>
         <div class="iidmf-country__body">
           <h3 class="iidmf-country__name">United Kingdom</h3>
-          <p><strong>Meriel Paget and ensemble</strong>, from Leeds Conservatoire, weave traditional Welsh tunes into a set of alternative folk music and original songwriting. Fiddle and voice carry the melodies, while live looping lets the musicians build layers of sound as they perform.</p>
+          <p><strong>Meriel Paget and ensemble</strong>, from the Leeds Conservatoire, weave traditional Welsh tunes into a set of alternative folk music and original songwriting. Fiddle and voice carry the melodies, while live looping lets the musicians build layers of sound as they perform.</p>
         </div>
       </article>
 
@@ -184,10 +189,10 @@
       </article>
 
       <article class="iidmf-country">
-        <div class="iidmf-country__media" data-photos="assets/countries/botswana-1.jpg, assets/countries/botswana-2.jpg, assets/countries/botswana-3.jpg" data-alt="Elnny Kumar & Group performing"></div>
+        <div class="iidmf-country__media" data-photos="assets/countries/botswana-1.jpg, assets/countries/botswana-2.jpg, assets/countries/botswana-3.jpg" data-alt="Elnny Kumar &amp; Team Distant performing"></div>
         <div class="iidmf-country__body">
           <h3 class="iidmf-country__name">Botswana</h3>
-          <p><strong>Elnny Kumar &amp; Group</strong> bring together influences from Setswana music and Bollywood. Kumar’s work reflects a connection to both Botswana and Indian performance traditions, giving the audience a chance to hear how those influences come together in one ensemble.</p>
+          <p><strong>Elnny Kumar &amp; Team Distant</strong> bring together influences from Setswana music and Bollywood. Kumar’s work reflects a connection to both Botswana and Indian performance traditions, giving the audience a chance to hear how those influences come together in one ensemble.</p>
         </div>
       </article>
 
@@ -229,8 +234,8 @@
           <h3 class="iidmf-day__date" id="iidmf-day1"><span class="iidmf-day__num">4</span> Friday, 4 December 2026</h3>
           <ul class="iidmf-day__list">
             <li>Gori Women’s Choir from <strong>Georgia</strong></li>
-            <li>Ulytau Regional Philharmonic and Altyn Orda Folk Ensemble from <strong>Kazakhstan</strong></li>
-            <li>Elnny Kumar &amp; Group from <strong>Botswana</strong></li>
+            <li>Altyn Orda Folk Ensemble and Jezz Acoustic Band of the Ulytau Regional Philharmonic from <strong>Kazakhstan</strong></li>
+            <li>Elnny Kumar and Team Distant from <strong>Botswana</strong></li>
             <li>Folk Ceylonia Traditional Folk Singing and Dancing Troupe from <strong>Sri Lanka</strong></li>
           </ul>
         </section>
@@ -239,9 +244,9 @@
           <img class="iidmf-char iidmf-char--day" src="assets/characters/character-uk-guitarist.webp" width="291" height="720" alt="" aria-hidden="true" loading="lazy" decoding="async">
           <h3 class="iidmf-day__date" id="iidmf-day2"><span class="iidmf-day__num">5</span> Saturday, 5 December 2026</h3>
           <ul class="iidmf-day__list">
-            <li>Meriel Paget and Ensemble, Leeds Conservatoire from the <strong>United Kingdom</strong></li>
+            <li>Meriel Paget and Ensemble of Leeds Conservatoire from the <strong>United Kingdom</strong></li>
             <li>Heerapanna from the <strong>Maldives</strong></li>
-            <li>Dance Conservatory of Eva Jacz from <strong>Slovakia</strong></li>
+            <li>The Dance Conservatory of Eva Jacz from <strong>Slovakia</strong></li>
             <li>Tuurgatan Musical Drama Theatre Group from <strong>Mongolia</strong></li>
             <li>Algerian House of Opera Ballet from <strong>Algeria</strong></li>
           </ul>
@@ -259,10 +264,9 @@
         </section>
       </div>
 
-      <div class="iidmf-programme__outro">
-        <p class="iidmf-programme__outro-h">Make an evening of it at Central Park.</p>
-        <p>Make it a night out with friends and family and enjoy live performances by dancers and musicians from around the world. From 5:30 PM onwards every day.</p>
-        <a class="iidmf-btn iidmf-btn--light" href="#iidmf-register">Register for your invite</a>
+      <div class="iidmf-programme__actions">
+        <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register here for your invite</a>
+        <a class="iidmf-btn iidmf-btn--purple" href="https://www.google.com/maps/search/?api=1&amp;query=Central+Park+Connaught+Place+New+Delhi" target="_blank" rel="noopener">Get directions to venue<span class="iidmf-sr"> (opens Google Maps in a new tab)</span></a>
       </div>
     </div>
   </section>
@@ -282,26 +286,26 @@
       <div id="iidmf-tour-list" class="iidmf-tour__panel" hidden>
         <h3 class="iidmf-tour__title">State-wise itinerary</h3>
         <span class="iidmf-ornament iidmf-ornament--center" aria-hidden="true"></span>
-        <p class="iidmf-swipe-hint">Swipe to see all 11 stops</p>
+        <p class="iidmf-swipe-hint">Swipe to see all 10 stops</p>
         <ul class="iidmf-tour__grid">
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Uttar Pradesh</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>25 &amp; 26 November 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Lucknow</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Tribal Festival, UP Darshan Park, Gomti Nagar, Lucknow</span></p>
             <p class="iidmf-stop__extra">In collaboration with the International Tribal Festival</p>
             <p class="iidmf-stop__extra">Cultural groups: Kazakhstan and Maldives</p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Odisha</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>28 &amp; 29 November 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Cuttack</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Bali Jatra Utsav, Cuttack</span></p>
             <p class="iidmf-stop__extra">In collaboration with Historic Kataka Balijatra</p>
             <p class="iidmf-stop__extra">Cultural groups: Kazakhstan and Maldives</p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Gujarat</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>1 &amp; 2 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Kutch</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Rann Utsav, Rann Tent City, Dhordo, Kutch</span></p>
             <p class="iidmf-stop__extra">In collaboration with the Kutch Festival</p>
             <p class="iidmf-stop__extra">Cultural groups: Kazakhstan and Maldives</p>
           </li>
@@ -315,46 +319,39 @@
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Chandigarh</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>7 &amp; 8 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Chandigarh</span></p>
-            <p class="iidmf-stop__extra">In collaboration with the India International Dance &amp; Music Festival</p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Chandigarh University</span></p>
+            <p class="iidmf-stop__extra">12th India International Dance &amp; Music Festival</p>
             <p class="iidmf-stop__extra">Cultural groups: 11 groups</p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Meghalaya</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>11 &amp; 12 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Shillong</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Tri Hills Ensemble Festival, U Soso Tham Auditorium, Shillong</span></p>
             <p class="iidmf-stop__extra">In collaboration with the Tri Hills Festival</p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Assam</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>11 &amp; 12 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Guwahati</span></p>
-            <p class="iidmf-stop__extra">In collaboration with the International Dance &amp; Music Festival</p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Srimanta Shankardev Kalakshetra, Guwahati</span></p>
+            <p class="iidmf-stop__extra">International Dance &amp; Music Festival</p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Mizoram</h4>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>11 &amp; 12 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Festival name, city and venue to be confirmed</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Dates and venue to be confirmed</span></p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Bihar</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>11 &amp; 12 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Vaishali</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>International Buddhist Conference, Vaishali</span></p>
             <p class="iidmf-stop__extra">In collaboration with the International Buddhist Conference, Vaishali</p>
             <p class="iidmf-stop__extra">Cultural groups: Indonesia on 11 December and Slovakia on 12 December</p>
           </li>
           <li class="iidmf-stop">
             <h4 class="iidmf-stop__state">Haryana</h4>
             <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>14 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Kurukshetra</span></p>
+            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>International Geeta Mahotsav, Kurukshetra</span></p>
             <p class="iidmf-stop__extra">In collaboration with Geeta Mahotsav</p>
             <p class="iidmf-stop__extra">Cultural groups: Indonesia and Sri Lanka</p>
-          </li>
-          <li class="iidmf-stop">
-            <h4 class="iidmf-stop__state">Delhi NCR</h4>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-cal"/></svg><span>1 to 15 December 2026</span></p>
-            <p class="iidmf-stop__row"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#iidmf-i-pin"/></svg><span>Universities and colleges across Delhi NCR</span></p>
-            <p class="iidmf-stop__extra">Cultural groups: to be confirmed</p>
           </li>
         </ul>
       </div>
@@ -367,9 +364,6 @@
       <div class="iidmf-register__intro">
         <img class="iidmf-char iidmf-char--register" src="assets/characters/character-indonesia-balinese-dancer.webp" width="389" height="720" alt="" aria-hidden="true" loading="lazy" decoding="async">
         <h2 class="iidmf-h2" id="iidmf-register-h">Get your invite</h2>
-        <p>Entry is free. Register once for yourself and up to four people coming with you, then download your pass straight away.</p>
-        <p>Show the pass on your phone or as a printout at the entry gate.</p>
-        <p class="iidmf-muted">Lost your pass? Fill in the form again with the same email and mobile number to download it again.</p>
       </div>
 
       <div class="iidmf-register__card">
@@ -386,21 +380,14 @@
             <p class="iidmf-err" id="iidmf-email-err"></p>
           </div>
 
-          <div class="iidmf-row">
-            <div class="iidmf-field">
-              <label for="iidmf-phone">Mobile number</label>
-              <div class="iidmf-prefix">
-                <span aria-hidden="true">+91</span>
-                <input id="iidmf-phone" name="phone" type="tel" autocomplete="tel-national" inputmode="numeric" maxlength="16" required aria-describedby="iidmf-phone-hint iidmf-phone-err">
-              </div>
-              <p class="iidmf-hint" id="iidmf-phone-hint">10 digits</p>
-              <p class="iidmf-err" id="iidmf-phone-err"></p>
+          <div class="iidmf-field">
+            <label for="iidmf-phone">Mobile number</label>
+            <div class="iidmf-prefix">
+              <span aria-hidden="true">+91</span>
+              <input id="iidmf-phone" name="phone" type="tel" autocomplete="tel-national" inputmode="numeric" maxlength="16" required aria-describedby="iidmf-phone-hint iidmf-phone-err">
             </div>
-            <div class="iidmf-field">
-              <label for="iidmf-city">City <span class="iidmf-opt">(optional)</span></label>
-              <input id="iidmf-city" name="city" type="text" autocomplete="address-level2" maxlength="60" aria-describedby="iidmf-city-err">
-              <p class="iidmf-err" id="iidmf-city-err"></p>
-            </div>
+            <p class="iidmf-hint" id="iidmf-phone-hint">10 digits</p>
+            <p class="iidmf-err" id="iidmf-phone-err"></p>
           </div>
 
           <fieldset class="iidmf-field iidmf-days" aria-describedby="iidmf-days-err">
@@ -412,18 +399,6 @@
             </div>
             <p class="iidmf-err" id="iidmf-days-err"></p>
           </fieldset>
-
-          <div class="iidmf-field iidmf-field--short">
-            <label for="iidmf-attendees">Number of people, including you</label>
-            <select id="iidmf-attendees" name="attendees" aria-describedby="iidmf-attendees-err">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <p class="iidmf-err" id="iidmf-attendees-err"></p>
-          </div>
 
           <!-- Spam trap: hidden from people, bots fill it in -->
           <div class="iidmf-trap" aria-hidden="true">
@@ -474,11 +449,11 @@
       <div class="iidmf-connect">
         <span class="iidmf-connect__label">Connect with us</span>
         <ul class="iidmf-connect__list">
-          <li><a href="https://iccr.gov.in/" target="_blank" rel="noopener"><span class="iidmf-connect__k">Website</span> iccr.gov.in</a></li>
-          <li><a href="https://www.instagram.com/iccr_delhi/" target="_blank" rel="noopener"><span class="iidmf-connect__k">Instagram</span> iccr_delhi</a></li>
-          <li><a href="https://www.facebook.com/ICCROfficial/" target="_blank" rel="noopener"><span class="iidmf-connect__k">Facebook</span> Indian Council for Cultural Relations</a></li>
-          <li><a href="https://www.youtube.com/@ICCRHQ" target="_blank" rel="noopener"><span class="iidmf-connect__k">YouTube</span> @ICCRHQ</a></li>
-          <li><a href="https://x.com/iccr_hq" target="_blank" rel="noopener"><span class="iidmf-connect__k">X</span> @iccr_hq</a></li>
+          <li><a href="https://iccr.gov.in/" target="_blank" rel="noopener"><span class="iidmf-connect__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#iidmf-i-web"/></svg></span><span class="iidmf-connect__k">Website</span> iccr.gov.in</a></li>
+          <li><a href="https://www.instagram.com/iccr_delhi/" target="_blank" rel="noopener"><span class="iidmf-connect__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#iidmf-i-cam"/></svg></span><span class="iidmf-connect__k">Instagram</span> iccr_delhi</a></li>
+          <li><a href="https://www.facebook.com/ICCROfficial/" target="_blank" rel="noopener"><span class="iidmf-connect__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#iidmf-i-people"/></svg></span><span class="iidmf-connect__k">Facebook</span> Indian Council for Cultural Relations</a></li>
+          <li><a href="https://www.youtube.com/@ICCRHQ" target="_blank" rel="noopener"><span class="iidmf-connect__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#iidmf-i-play"/></svg></span><span class="iidmf-connect__k">YouTube</span> @ICCRHQ</a></li>
+          <li><a href="https://x.com/iccr_hq" target="_blank" rel="noopener"><span class="iidmf-connect__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#iidmf-i-post"/></svg></span><span class="iidmf-connect__k">X</span> @iccr_hq</a></li>
         </ul>
       </div>
     </div>
@@ -487,6 +462,11 @@
   <!-- Shared icons -->
   <svg class="iidmf-sprite" width="0" height="0" aria-hidden="true" focusable="false">
     <symbol id="iidmf-i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="13.5" r="1.1" fill="currentColor"/><circle cx="12" cy="13.5" r="1.1" fill="currentColor"/><circle cx="16" cy="13.5" r="1.1" fill="currentColor"/><circle cx="8" cy="17" r="1.1" fill="currentColor"/><circle cx="12" cy="17" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="iidmf-i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 3.6 5.4 3.6 8.5s-1 5.9-3.6 8.5M12 3.5C9.4 6.1 8.4 8.9 8.4 12s1 5.9 3.6 8.5"/></g></symbol>
+    <symbol id="iidmf-i-cam" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 8.5A2.5 2.5 0 016.5 6h1.8l1.4-2h4.6l1.4 2h1.8A2.5 2.5 0 0120 8.5v8a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 16.5z"/><circle cx="12" cy="12.4" r="3.4"/></g></symbol>
+    <symbol id="iidmf-i-people" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="16.6" cy="9.4" r="2.5"/><path d="M15.6 14.2c2.4-.3 4.4 1.2 4.9 4"/></g></symbol>
+    <symbol id="iidmf-i-play" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M10.2 9.3v5.4l4.6-2.7z" fill="currentColor"/></symbol>
+    <symbol id="iidmf-i-post" viewBox="0 0 24 24"><path d="M5 5.5h14a1.5 1.5 0 011.5 1.5v8.5A1.5 1.5 0 0119 17h-7.5L7 20.5V17H5a1.5 1.5 0 01-1.5-1.5V7A1.5 1.5 0 015 5.5z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8 10h8M8 13h5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
     <symbol id="iidmf-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.2V12l3.2 2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="iidmf-i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-6.5-6.2-6.5-11.3a6.5 6.5 0 0113 0c0 5.1-6.5 11.3-6.5 11.3z" fill="currentColor"/><circle cx="12" cy="10.2" r="2.4" fill="var(--iidmf-pin-dot, #fff)"/></symbol>
   </svg>

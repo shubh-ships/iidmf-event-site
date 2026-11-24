@@ -242,9 +242,7 @@
     full_name: { el: form.elements.full_name, err: 'iidmf-name-err' },
     email:     { el: form.elements.email,     err: 'iidmf-email-err' },
     phone:     { el: form.elements.phone,     err: 'iidmf-phone-err' },
-    city:      { el: form.elements.city,      err: 'iidmf-city-err' },
     days:      { el: $('.iidmf-days', form),  err: 'iidmf-days-err', focus: function () { form.querySelector('input[name="days"]').focus(); } },
-    attendees: { el: form.elements.attendees, err: 'iidmf-attendees-err' },
     consent:   { el: form.elements.consent,   err: 'iidmf-consent-err' }
   };
 
@@ -273,9 +271,9 @@
       full_name: form.elements.full_name.value.trim().replace(/\s+/g, ' '),
       email: form.elements.email.value.trim().toLowerCase(),
       phone: normalisePhone(form.elements.phone.value),
-      city: form.elements.city.value.trim(),
+      city: '',
       days: $$('input[name="days"]:checked', form).map(function (i) { return i.value; }),
-      attendees: parseInt(form.elements.attendees.value, 10),
+      attendees: 1, // one invite per registration
       consent: form.elements.consent.checked,
       website: form.elements.website.value,
       elapsed_ms: Date.now() - startedAt
@@ -289,9 +287,7 @@
     }
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(d.email)) errors.email = 'Enter a valid email address, like name@example.com.';
     if (!/^[6-9]\d{9}$/.test(d.phone)) errors.phone = 'Enter a 10-digit Indian mobile number.';
-    if (d.city.length > 60) errors.city = 'City name is too long.';
     if (!d.days.length) errors.days = 'Choose at least one evening.';
-    if (!(d.attendees >= 1 && d.attendees <= 5)) errors.attendees = 'Choose between 1 and 5 people.';
     if (!d.consent) errors.consent = 'Please agree to the use of your details to issue your invite.';
     return errors;
   }
@@ -412,18 +408,19 @@
    * The pass: drawn on a canvas, saved as PNG
    * ------------------------------------------------------------------ */
   var C = {
-    purple: '#3d0a72', purpleInk: '#26074d', magenta: '#e5097f', magentaDeep: '#b8005f',
-    sun: '#ffe500', orange: '#ff6a1a', cyan: '#19a7f2', violet: '#5a1fc4',
-    indigo: '#011c91', paper: '#fffbea', ink: '#22093f', muted: '#5d4b72'
+    purple: '#440d9f', purpleInk: '#2e0874', magenta: '#f72973', magentaDeep: '#d4145f',
+    sun: '#fed507', orange: '#ff7a1a', cyan: '#1577fc', violet: '#6112cf',
+    indigo: '#4e09ba', paper: '#fff9e6', ink: '#22093f', muted: '#5d4b72'
   };
-  var SERIF = '"Oswald", "Arial Narrow", Impact, sans-serif';           // display face
+  var SERIF = '"Montserrat", "Segoe UI", Arial, sans-serif';           // headings (heavy weights)
   var SANS = '"Montserrat", "Segoe UI", Arial, sans-serif';
+  var FUN = '"Luckiest Guy", "Arial Black", Impact, sans-serif';       // the poster's chunky lettering
 
   function fontsReady() {
     if (!document.fonts || !document.fonts.load) return Promise.resolve();
     return Promise.all([
-      document.fonts.load('700 40px "Oswald"'),
-      document.fonts.load('600 40px "Oswald"'),
+      document.fonts.load('400 40px "Luckiest Guy"'),
+      document.fonts.load('800 40px "Montserrat"'),
       document.fonts.load('500 20px "Montserrat"'),
       document.fonts.load('700 20px "Montserrat"')
     ]).catch(function () {});
@@ -520,8 +517,8 @@
     ctx.fillStyle = '#ffffff'; ctx.font = '600 38px ' + SERIF;
     ctx.fillText(parts[0] + '-', cx, y + 52);
     ctx.fillStyle = C.sun;
-    var cs = fitText(ctx, parts[1] || code, '700 {s}px ' + SERIF, 150, W - 140, 60);
-    ctx.font = '700 ' + cs + 'px ' + SERIF;
+    var cs = fitText(ctx, parts[1] || code, '400 {s}px ' + FUN, 150, W - 140, 60);
+    ctx.font = '400 ' + cs + 'px ' + FUN;
     ctx.fillText(parts[1] || code, cx, y + 52 + cs);
     var admits = t.attendees > 1 ? 'Admits ' + t.attendees + ' people' : 'Admits 1 person';
     ctx.font = '700 32px ' + SANS;
@@ -536,7 +533,7 @@
     y = SPLIT + 92;
     ctx.fillStyle = C.magentaDeep; ctx.font = '700 28px ' + SANS;
     ctx.fillText('Invitation pass', x, y);
-    ctx.fillStyle = C.purple; ctx.font = '700 62px ' + SERIF;
+    ctx.fillStyle = C.purple; ctx.font = '800 54px ' + SERIF;
     var tl = wrap(ctx, '12th India International Dance & Music Festival', cw);
     tl.forEach(function (l, i) { ctx.fillText(l, x, y + 74 + i * 70); });
     y += 74 + (tl.length - 1) * 70 + 44;
@@ -567,7 +564,7 @@
     ctx.fillText('Registered email: ' + t.email, x, H - BAND - 40);
 
     // Band
-    ctx.fillStyle = C.sun; ctx.font = '700 52px ' + SERIF;
+    ctx.fillStyle = C.sun; ctx.font = '400 50px ' + FUN;
     ctx.fillText('Free entry', x, H - BAND + 68);
     ctx.fillStyle = '#ffffff';
     var note = 'Show this pass at the entry gate, on your phone or printed.';
@@ -627,7 +624,7 @@
       ctx.fillText('Invitation pass', x, 92);
 
       ctx.fillStyle = C.purple;
-      ctx.font = '700 58px ' + SERIF;
+      ctx.font = '800 52px ' + SERIF;
       var titleLines = wrap(ctx, '12th India International Dance & Music Festival', contentW);
       titleLines.forEach(function (l, i) { ctx.fillText(l, x, 158 + i * 62); });
       var y = 158 + (titleLines.length - 1) * 62;
@@ -658,7 +655,7 @@
 
       // Band text
       ctx.fillStyle = C.sun;
-      ctx.font = '700 34px ' + SERIF;
+      ctx.font = '400 34px ' + FUN;
       ctx.fillText('Free entry', x, H - 36);
       var bandNote = 'Show this pass at the entry gate, on your phone or printed.';
       var noteX = x + ctx.measureText('Free entry').width + 36; // measured in the serif font set above
@@ -687,8 +684,8 @@
       ctx.font = '600 28px ' + SERIF;
       ctx.fillText(parts[0] + '-', sx, top + 64);
       ctx.fillStyle = C.sun;
-      var codeSize = fitText(ctx, parts[1] || code, '700 {s}px ' + SERIF, 72, STUB - 70, 40);
-      ctx.font = '700 ' + codeSize + 'px ' + SERIF;
+      var codeSize = fitText(ctx, parts[1] || code, '400 {s}px ' + FUN, 72, STUB - 70, 40);
+      ctx.font = '400 ' + codeSize + 'px ' + FUN;
       ctx.fillText(parts[1] || code, sx, top + 64 + codeSize + 4);
 
       // Admits circle
@@ -696,7 +693,7 @@
       ctx.strokeStyle = 'rgba(255,229,0,0.6)'; ctx.lineWidth = 3;
       ctx.beginPath(); ctx.arc(sx, cy, 72, 0, Math.PI * 2); ctx.stroke();
       ctx.fillStyle = '#ffffff';
-      ctx.font = '700 80px ' + SERIF;
+      ctx.font = '400 80px ' + FUN;
       ctx.fillText(String(t.attendees), sx, cy + 27);
       ctx.fillStyle = '#e9c9da';
       ctx.font = '500 24px ' + SANS;
