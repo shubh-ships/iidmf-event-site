@@ -14,8 +14,11 @@ const RATE_LIMIT_PER_HOUR = 20; // per IP; generous because offices and colleges
 const MIN_FILL_MS = 2500;       // humans take longer than this to fill the form
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O, 1/I
 
-const allowedOrigins = (Deno.env.get("ALLOWED_ORIGINS") ?? "")
-  .split(",").map((s) => s.trim().replace(/\/$/, "")).filter(Boolean);
+// Read on every request (not once at start-up), so a changed secret takes effect at once
+function allowedOrigins(): string[] {
+  return (Deno.env.get("ALLOWED_ORIGINS") ?? "")
+    .split(",").map((s) => s.trim().replace(/\/$/, "")).filter(Boolean);
+}
 
 // Supabase is replacing the old "service_role" key with "secret" keys (sb_secret_...).
 // Use the new key when the project has one, and fall back to the old variable otherwise,
@@ -39,9 +42,10 @@ const supabase = createClient(
 );
 
 function corsHeaders(origin: string | null): Record<string, string> {
-  const allow = allowedOrigins.includes("*")
+  const allowed = allowedOrigins();
+  const allow = allowed.includes("*")
     ? "*"
-    : origin && allowedOrigins.includes(origin) ? origin : "";
+    : origin && allowed.includes(origin) ? origin : "";
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -92,7 +96,9 @@ Deno.serve(async (req) => {
     return new Response(null, { status: 204, headers: corsHeaders(origin) });
   }
   if (req.method !== "POST") return fail("Method not allowed.", 405, origin);
-  if (!allowedOrigins.includes("*") && (!origin || !allowedOrigins.includes(origin))) {
+  const allowed = allowedOrigins();
+  if (!allowed.includes("*") && (!origin || !allowed.includes(origin))) {
+    console.warn(`Blocked request from origin "${origin ?? "(none)"}". Allowed: ${allowed.join(", ") || "(ALLOWED_ORIGINS is empty or not set)"}`);
     return fail("Registrations are only accepted from the festival website.", 403, origin);
   }
 

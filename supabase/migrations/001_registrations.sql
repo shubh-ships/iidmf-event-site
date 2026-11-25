@@ -33,3 +33,8 @@ create index if not exists registrations_ip_recent_idx
 -- There are deliberately NO policies, so anonymous and signed-in users get nothing.
 alter table public.registrations enable row level security;
 revoke all on public.registrations from anon, authenticated;
+
+-- New Supabase projects (since May 2026) no longer give new tables any permissions by
+-- default, so the functions' database user must be granted what it needs, explicitly.
+-- `register` reads and adds rows; `admin` reads rows. Nothing needs to change or delete them.
+grant select, insert on public.registrations to service_role;

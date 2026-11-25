@@ -15,6 +15,10 @@ drop table if exists public.admins;
 -- nobody reads the table from a browser any more; the `admin` Edge Function does it
 revoke all on public.registrations from anon, authenticated;
 
+-- New Supabase projects (since May 2026) give new tables no permissions by default,
+-- so the Edge Functions' database user needs these two, explicitly.
+grant select, insert on public.registrations to service_role;
+
 -- fields the form no longer asks for
 alter table public.registrations
   drop column if exists city,
