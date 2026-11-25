@@ -176,7 +176,7 @@
       var open = btn.getAttribute('aria-expanded') !== 'true';
       btn.setAttribute('aria-expanded', String(open));
       panel.hidden = !open;
-      label.textContent = open ? 'Hide state-wise itinerary' : 'Explore state-wise itinerary';
+      label.textContent = open ? 'Hide State-wise Itinerary' : 'Explore State-wise Itinerary \u2192';
       if (open) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     });
   })();
