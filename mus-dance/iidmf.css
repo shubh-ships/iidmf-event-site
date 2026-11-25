@@ -280,9 +280,13 @@
   color: #fff;
 }
 
-.iidmf-hero__figures { position: relative; z-index: 1; display: block; width: min(100%, 62rem); height: auto; margin: clamp(1.75rem, 3.5vw, 2.75rem) auto 0; padding-inline: var(--gutter); box-sizing: border-box; }
 .iidmf-hero__figures {
-  clip-path: inset(0 calc(var(--gutter) + 3px)); /* trims a 1px edge left by the cut-out */
+  position: relative; z-index: 1; display: block;
+  width: min(100%, 54rem); height: auto;
+  margin: clamp(1.25rem, 2.5vw, 2.25rem) auto 0;
+  padding-inline: var(--gutter);
+  box-sizing: border-box;
+  filter: drop-shadow(0 14px 28px rgba(10,0,35,.5));
 }
 
 /* ---------- Intro band ---------- */
@@ -585,7 +589,7 @@
   .iidmf-title__fest { font-size: 2.75rem; }
   .iidmf-hero__info { flex-direction: column; gap: 1rem; margin-top: 1.75rem; }
   .iidmf-free { width: 6.75rem; }
-  .iidmf-hero__figures { width: 140%; max-width: none; margin-left: -20%; padding-inline: 0; margin-top: 1.5rem; clip-path: none; }
+  .iidmf-hero__figures { width: 100%; max-width: none; margin-left: 0; padding-inline: var(--gutter); margin-top: 1.25rem; clip-path: none; }
 
   /* pills: date + time side by side, venue full width */
   .iidmf-pills { grid-template-columns: 1fr 1fr; gap: .6rem; width: 100%; }
