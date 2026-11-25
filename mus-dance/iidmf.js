@@ -176,7 +176,7 @@
       var open = btn.getAttribute('aria-expanded') !== 'true';
       btn.setAttribute('aria-expanded', String(open));
       panel.hidden = !open;
-      label.textContent = open ? 'Hide State-wise Itinerary' : 'Explore State-wise Itinerary \u2192';
+      label.textContent = open ? 'Hide' : 'Explore';
       if (open) panel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     });
   })();
@@ -218,7 +218,7 @@
 
     // During the festival, open on today's evening (India time)
     var today = '';
-    try { today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date()); } catch (e) {}
+    try { today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date()); } catch (e) { }
     var start = Math.max(0, panels.findIndex ? panels.findIndex(function (p) { return p.id === 'iidmf-day-' + today; }) : 0);
 
     days.parentNode.insertBefore(bar, days);
@@ -240,10 +240,10 @@
 
   var FIELDS = {
     full_name: { el: form.elements.full_name, err: 'iidmf-name-err' },
-    email:     { el: form.elements.email,     err: 'iidmf-email-err' },
-    phone:     { el: form.elements.phone,     err: 'iidmf-phone-err' },
-    days:      { el: $('.iidmf-days', form),  err: 'iidmf-days-err', focus: function () { form.querySelector('input[name="days"]').focus(); } },
-    consent:   { el: form.elements.consent,   err: 'iidmf-consent-err' }
+    email: { el: form.elements.email, err: 'iidmf-email-err' },
+    phone: { el: form.elements.phone, err: 'iidmf-phone-err' },
+    days: { el: $('.iidmf-days', form), err: 'iidmf-days-err', focus: function () { form.querySelector('input[name="days"]').focus(); } },
+    consent: { el: form.elements.consent, err: 'iidmf-consent-err' }
   };
 
   function setError(key, msg) {
@@ -421,7 +421,7 @@
       document.fonts.load('800 40px "Montserrat"'),
       document.fonts.load('500 20px "Montserrat"'),
       document.fonts.load('700 20px "Montserrat"')
-    ]).catch(function () {});
+    ]).catch(function () { });
   }
 
   var logoPromise = null;

@@ -31,15 +31,6 @@
     data-function-url="https://ymoplljkdpqenexgxamt.supabase.co/functions/v1/register"
     data-logo="assets/iccr-logo-white.png">
 
-    <!-- ================= TOP NAVIGATION ================= -->
-    <nav class="iidmf-top-nav" aria-label="Quick navigation">
-      <div class="iidmf-wrap iidmf-top-nav__inner">
-        <a class="iidmf-top-nav__link" href="#iidmf-register">Register Here for Free Entry</a>
-        <span class="iidmf-top-nav__sep" aria-hidden="true">•</span>
-        <a class="iidmf-top-nav__link" href="#iidmf-programme">Programme Details</a>
-      </div>
-    </nav>
-
     <!-- ================= HERO ================= -->
     <header class="iidmf-hero" id="iidmf-top">
       <svg class="iidmf-splash iidmf-splash--l" viewBox="0 0 240 260" aria-hidden="true" focusable="false">
@@ -69,38 +60,53 @@
           alt="Government of India, Indian Council for Cultural Relations (ICCR)">
         <p class="iidmf-hero__org">Indian Council for Cultural Relations</p>
         <p class="iidmf-hero__presents"><span>presents</span></p>
+
         <h1 class="iidmf-title">
-          <span class="iidmf-title__top"><span class="iidmf-title__num">12<sup>th</sup></span> <span
-              class="iidmf-title__intl">India <br>International</span></span>
-          <span class="iidmf-title__dance">Dance</span>
-          <span class="iidmf-title__and"><span class="iidmf-burst iidmf-burst--l" aria-hidden="true"></span>and<span
-              class="iidmf-burst iidmf-burst--r" aria-hidden="true"></span></span>
-          <span class="iidmf-title__music">Music</span>
-          <span class="iidmf-title__fest">Festival</span>
+          <span class="iidmf-sr">12th India International Dance &amp; Music Festival</span>
+          <img class="iidmf-title__logo" src="assets/dance & music festival logo.png" width="1843" height="1728"
+            alt="12th India International Dance &amp; Music Festival">
         </h1>
-        <div class="iidmf-hero__actions">
-          <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register here for free entry</a>
-          <a class="iidmf-btn iidmf-btn--sun" href="#iidmf-programme">Programme Details</a>
-          <a class="iidmf-btn iidmf-btn--white iidmf-hero__directions"
-            href="https://www.google.com/maps/search/?api=1&amp;query=Central+Park+Connaught+Place+New+Delhi"
-            target="_blank" rel="noopener">Get directions to venue<span class="iidmf-sr"> (opens Google Maps in a new
-              tab)</span></a>
+      </div>
+
+      <!-- Center Stage: Artists illustration + Free Entry badge on bottom right -->
+      <div class="iidmf-hero__stage">
+        <img class="iidmf-hero__figures" src="assets/artist.png" width="2618" height="2033"
+          alt="Illustrated international dancers and musicians">
+        <div class="iidmf-badge-free" aria-label="Free Entry">
+          <svg class="iidmf-free" viewBox="0 0 230 230" role="img" aria-hidden="true">
+            <!-- 3 festive rays top-right (from poster) -->
+            <line x1="172" y1="38" x2="188" y2="16" stroke="#1577fc" stroke-width="5.5" stroke-linecap="round" />
+            <line x1="188" y1="52" x2="212" y2="35" stroke="#fed507" stroke-width="5.5" stroke-linecap="round" />
+            <line x1="198" y1="72" x2="224" y2="62" stroke="#f72973" stroke-width="5.5" stroke-linecap="round" />
+            <g transform="translate(15, 20)">
+              <path fill="#f72973"
+                d="M187.80 100.00A13.28 13.28 0 0 1 184.24 124.74A13.28 13.28 0 0 1 173.86 147.47A13.28 13.28 0 0 1 157.50 166.35A13.28 13.28 0 0 1 136.47 179.87A13.28 13.28 0 0 1 112.50 186.91A13.28 13.28 0 0 1 87.50 186.91A13.28 13.28 0 0 1 63.53 179.87A13.28 13.28 0 0 1 42.50 166.35A13.28 13.28 0 0 1 26.14 147.47A13.28 13.28 0 0 1 15.76 124.74A13.28 13.28 0 0 1 12.20 100.00A13.28 13.28 0 0 1 15.76 75.26A13.28 13.28 0 0 1 26.14 52.53A13.28 13.28 0 0 1 42.50 33.65A13.28 13.28 0 0 1 63.53 20.13A13.28 13.28 0 0 1 87.50 13.09A13.28 13.28 0 0 1 112.50 13.09A13.28 13.28 0 0 1 136.47 20.13A13.28 13.28 0 0 1 157.50 33.65A13.28 13.28 0 0 1 173.86 52.53A13.28 13.28 0 0 1 184.24 75.26A13.28 13.28 0 0 1 187.80 100.00Z" />
+              <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="0.1 9"
+                stroke-linecap="round" />
+              <circle cx="100" cy="100" r="68" fill="#fed507" />
+              <text x="100" y="90" text-anchor="middle" font-family="'Montserrat', sans-serif" font-weight="900"
+                font-size="31" fill="#20063b" letter-spacing="1">FREE</text>
+              <text x="100" y="126" text-anchor="middle" font-family="'Montserrat', sans-serif" font-weight="900"
+                font-size="31" fill="#20063b" letter-spacing="1">ENTRY</text>
+            </g>
+          </svg>
         </div>
       </div>
 
+      <!-- 3 Yellow Event Cards (directly framing the artist stage, like the poster) -->
       <div class="iidmf-wrap iidmf-hero__info" aria-label="Dates, time and venue">
         <ul class="iidmf-pills">
           <li class="iidmf-pill">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <use href="#iidmf-i-cal" />
             </svg>
-            <span><strong>4<sup>th</sup>, 5<sup>th</sup> &amp; 6<sup>th</sup></strong> December 2026</span>
+            <span><strong>4<sup>th</sup>, 5<sup>th</sup> &amp; 6<sup>th</sup></strong> December, 2026</span>
           </li>
           <li class="iidmf-pill">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <use href="#iidmf-i-clock" />
             </svg>
-            <span><strong>5:30 PM</strong> onwards every day</span>
+            <span><strong>5:30 PM</strong> Onwards Everyday</span>
           </li>
           <li class="iidmf-pill">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -109,25 +115,82 @@
             <span><strong>Central Park,</strong> Connaught Place, New Delhi</span>
           </li>
         </ul>
-        <svg class="iidmf-free" viewBox="0 0 200 200" role="img" aria-label="Free entry for all">
-          <path fill="#f72973"
-            d="M187.80 100.00A13.28 13.28 0 0 1 184.24 124.74A13.28 13.28 0 0 1 173.86 147.47A13.28 13.28 0 0 1 157.50 166.35A13.28 13.28 0 0 1 136.47 179.87A13.28 13.28 0 0 1 112.50 186.91A13.28 13.28 0 0 1 87.50 186.91A13.28 13.28 0 0 1 63.53 179.87A13.28 13.28 0 0 1 42.50 166.35A13.28 13.28 0 0 1 26.14 147.47A13.28 13.28 0 0 1 15.76 124.74A13.28 13.28 0 0 1 12.20 100.00A13.28 13.28 0 0 1 15.76 75.26A13.28 13.28 0 0 1 26.14 52.53A13.28 13.28 0 0 1 42.50 33.65A13.28 13.28 0 0 1 63.53 20.13A13.28 13.28 0 0 1 87.50 13.09A13.28 13.28 0 0 1 112.50 13.09A13.28 13.28 0 0 1 136.47 20.13A13.28 13.28 0 0 1 157.50 33.65A13.28 13.28 0 0 1 173.86 52.53A13.28 13.28 0 0 1 184.24 75.26A13.28 13.28 0 0 1 187.80 100.00Z" />
-          <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="0.1 9"
-            stroke-linecap="round" />
-          <circle cx="100" cy="100" r="68" fill="#fed507" />
-          <text x="100" y="88" text-anchor="middle">FREE</text>
-          <text x="100" y="119" text-anchor="middle">ENTRY</text>
-          <text class="iidmf-free__small" x="100" y="143" text-anchor="middle">FOR ALL</text>
-        </svg>
       </div>
 
-      <p class="iidmf-hero__social-hint">
-        For real-time updates, schedules, and announcements, follow ICCR’s <a href="#iidmf-connect">social media
-          handles</a>.
-      </p>
+      <!-- Action buttons -->
+      <div class="iidmf-hero__actions">
+        <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register Here for Free Entry</a>
+        <a class="iidmf-btn iidmf-btn--sun" href="#iidmf-programme">Programme Details</a>
+        <a class="iidmf-btn iidmf-btn--white iidmf-hero__directions"
+          href="https://www.google.com/maps/search/?api=1&amp;query=Central+Park+Connaught+Place+New+Delhi"
+          target="_blank" rel="noopener">Get directions to venue<span class="iidmf-sr"> (opens Google Maps in a new
+            tab)</span></a>
+      </div>
 
-      <img class="iidmf-hero__figures" src="assets/artist.png" width="2618" height="2033"
-        alt="Illustrated international dancers and musicians">
+      <!-- Participating Countries Preview (from poster) -->
+      <div class="iidmf-hero__countries">
+        <span class="iidmf-hero__countries-badge">Participating Countries</span>
+        <p class="iidmf-hero__countries-list">
+          Georgia &bull; Kazakhstan &bull; Botswana &bull; United Kingdom<br>
+          &bull; Slovakia &bull; Mongolia &bull; Algeria &bull; Indonesia &bull; Cameroon<br>
+          &bull; Sri Lanka &bull; Russia &bull; Iraq &bull; Maldives &bull; Vietnam
+        </p>
+      </div>
+
+      <!-- Poster-style Connect with ICCR strip -->
+      <div class="iidmf-hero__connect-bar" aria-label="Connect with ICCR">
+        <span class="iidmf-hero__connect-pill">Connect with us</span>
+        <div class="iidmf-hero__connect-links">
+          <a href="https://iccr.gov.in/" target="_blank" rel="noopener" class="iidmf-hero__connect-item"
+            aria-label="ICCR Website">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                fill="none" stroke="currentColor" stroke-width="2" />
+            </svg>
+            <span>https://iccr.gov.in/</span>
+          </a>
+          <a href="https://www.instagram.com/iccr_delhi/" target="_blank" rel="noopener"
+            class="iidmf-hero__connect-item" aria-label="ICCR Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor"
+                stroke-width="2" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor"
+                stroke-width="2" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" />
+            </svg>
+            <span>@iccr_delhi</span>
+          </a>
+          <a href="https://www.facebook.com/ICCROfficial" target="_blank" rel="noopener"
+            class="iidmf-hero__connect-item" aria-label="ICCR Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor" />
+            </svg>
+            <span>Indian Council for Cultural Relations</span>
+          </a>
+          <a href="https://www.youtube.com/@ICCRHQ" target="_blank" rel="noopener" class="iidmf-hero__connect-item"
+            aria-label="ICCR YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
+                fill="none" stroke="currentColor" stroke-width="2" />
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" />
+            </svg>
+            <span>@ICCRHQ</span>
+          </a>
+          <a href="https://x.com/iccr_hq" target="_blank" rel="noopener" class="iidmf-hero__connect-item"
+            aria-label="ICCR X">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                fill="currentColor" />
+            </svg>
+            <span>@iccr_hq</span>
+          </a>
+        </div>
+      </div>
     </header>
 
     <!-- ================= INTRO ================= -->
@@ -142,7 +205,7 @@
           and the vibrant beats of Maldivian Boduberu, witness extraordinary dance and music come alive on one stage.
           Every performance invites you to witness heritage in motion and discover sounds you’ve never heard before.</p>
         <p class="iidmf-band__cta"><span>To get an invite,</span> <a class="iidmf-btn iidmf-btn--primary"
-            href="#iidmf-register">Register here for free entry</a></p>
+        href="#iidmf-register">Register Here for Free Entry</a></p>
       </div>
     </section>
 
@@ -383,7 +446,8 @@
             <ul class="iidmf-day__list">
               <li>Gori Women’s Choir from <strong>Georgia</strong></li>
               <li>Altyn Orda Folk Ensemble and Jezz Acoustic Band of the Ulytau Regional Philharmonic from
-                <strong>Kazakhstan</strong></li>
+                <strong>Kazakhstan</strong>
+              </li>
               <li>'Elnny Kumar and Team Distant' from <strong>Botswana</strong></li>
               <li>Folk Ceylonia Traditional Folk Singing and Dancing Troupe from <strong>Sri Lanka</strong></li>
             </ul>
@@ -401,7 +465,8 @@
               <li>Tuurgatan Musical Drama Theatre Group from <strong>Mongolia</strong></li>
               <li>Algerian House of Opera Ballet from <strong>Algeria</strong></li>
               <li>Musical Ensemble of the Department of Culture, Sports and Tourism of Lang Son Province from
-                <strong>Vietnam</strong></li>
+                <strong>Vietnam</strong>
+              </li>
             </ul>
           </section>
 
@@ -420,11 +485,11 @@
         </div>
 
         <div class="iidmf-programme__actions">
-          <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register here for free entry</a>
+          <a class="iidmf-btn iidmf-btn--primary" href="#iidmf-register">Register Here for Free Entry</a>
           <a class="iidmf-btn iidmf-btn--purple"
             href="https://www.google.com/maps/search/?api=1&amp;query=Central+Park+Connaught+Place+New+Delhi"
-            target="_blank" rel="noopener">Get Directions to Venue (Google Map)<span class="iidmf-sr"> (opens Google
-              Maps in a new tab)</span></a>
+              target="_blank" rel="noopener">Get Directions to Venue<span class="iidmf-sr"> (opens Google
+                Maps in a new tab)</span></a>
         </div>
       </div>
     </section>
@@ -518,10 +583,10 @@
         <div class="iidmf-tour__head">
           <img class="iidmf-char iidmf-char--tour" src="assets/characters/character-kazakhstan-dombra-player.webp"
             width="312" height="720" alt="" aria-hidden="true" loading="lazy" decoding="async">
-          <h2 class="iidmf-h2" id="iidmf-tour-h">Is the festival coming to your state?</h2>
+          <h2 class="iidmf-h2" id="iidmf-tour-h">Is the festival happening in your city?</h2>
           <button type="button" class="iidmf-btn iidmf-btn--primary" aria-expanded="false"
             aria-controls="iidmf-tour-list" data-iidmf-tour-toggle>
-            <span data-iidmf-tour-label>Explore State-wise Itinerary &rarr;</span>
+            <span data-iidmf-tour-label>Explore</span>
             <svg class="iidmf-chev" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6 9l6 6 6-6" />
             </svg>
@@ -658,7 +723,7 @@
           </div>
           <div>
             <img class="iidmf-char iidmf-char--footer" src="assets/characters/character-georgia-choir-singers.webp"
-              width="566" height="720" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              alt="" aria-hidden="true" loading="lazy" decoding="async">
             <h2 class="iidmf-h3">Stay in the loop</h2>
             <p>For real-time updates, schedules, and announcements, follow ICCR’s social media handles.</p>
           </div>
