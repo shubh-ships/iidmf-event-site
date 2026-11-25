@@ -271,9 +271,7 @@
       full_name: form.elements.full_name.value.trim().replace(/\s+/g, ' '),
       email: form.elements.email.value.trim().toLowerCase(),
       phone: normalisePhone(form.elements.phone.value),
-      city: '',
       days: $$('input[name="days"]:checked', form).map(function (i) { return i.value; }),
-      attendees: 1, // one invite per registration
       consent: form.elements.consent.checked,
       website: form.elements.website.value,
       elapsed_ms: Date.now() - startedAt
@@ -377,7 +375,7 @@
           var img = $('[data-iidmf-pass-img]');
           img.src = currentPassUrl;
           img.alt = 'Invitation pass for ' + ticket.full_name + ', pass code ' + ticket.ticket_code +
-            ', admits ' + ticket.attendees + ', for ' + formatDays(ticket.days, 'long') + ' December 2026.';
+            ', admit one, for ' + formatDays(ticket.days, 'long') + ' December 2026.';
 
           var dl = $('[data-iidmf-download]');
           dl.href = currentPassUrl;
@@ -520,7 +518,7 @@
     var cs = fitText(ctx, parts[1] || code, '400 {s}px ' + FUN, 150, W - 140, 60);
     ctx.font = '400 ' + cs + 'px ' + FUN;
     ctx.fillText(parts[1] || code, cx, y + 52 + cs);
-    var admits = t.attendees > 1 ? 'Admits ' + t.attendees + ' people' : 'Admits 1 person';
+    var admits = 'Admit one person';
     ctx.font = '700 32px ' + SANS;
     var aw = ctx.measureText(admits).width + 64, ay = SPLIT - 100;
     ctx.strokeStyle = C.sun; ctx.lineWidth = 3;
@@ -688,16 +686,19 @@
       ctx.font = '400 ' + codeSize + 'px ' + FUN;
       ctx.fillText(parts[1] || code, sx, top + 64 + codeSize + 4);
 
-      // Admits circle
+      // Admit-one seal
       var cy = top + 64 + codeSize + 4 + 110;
       ctx.strokeStyle = 'rgba(255,229,0,0.6)'; ctx.lineWidth = 3;
       ctx.beginPath(); ctx.arc(sx, cy, 72, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = '#e9c9da';
+      ctx.font = '800 22px ' + SANS;
+      ctx.fillText('ADMIT', sx, cy - 12);
       ctx.fillStyle = '#ffffff';
-      ctx.font = '400 80px ' + FUN;
-      ctx.fillText(String(t.attendees), sx, cy + 27);
+      ctx.font = '400 56px ' + FUN;
+      ctx.fillText('ONE', sx, cy + 40);
       ctx.fillStyle = '#e9c9da';
       ctx.font = '500 24px ' + SANS;
-      ctx.fillText(t.attendees > 1 ? 'Admits ' + t.attendees + ' people' : 'Admits 1 person', sx, cy + 112);
+      ctx.fillText('Valid for one person', sx, cy + 112);
 
       ctx.fillStyle = '#e9c9da';
       ctx.font = '400 18px ' + SANS;

@@ -3,9 +3,11 @@
 ```
 mus-dance/ index.html, iidmf.css, iidmf.js, assets/  → the landing page (host this folder)
 admin/     index.html                        → one-page admin panel (host anywhere)
-supabase/  migrations/001_registrations.sql  → database
-           functions/register/index.ts       → registration endpoint
-           config.toml                       → function setting
+supabase/  migrations/001_registrations.sql  → database (one table)
+           migrations/002_cleanup_old_setup.sql → only for databases made from older versions
+           functions/register/index.ts       → saves a registration
+           functions/admin/index.ts          → admin login, list and export
+           config.toml                       → function settings
 ```
 
 Everything runs on the Supabase free tier. The landing page has **no third-party
@@ -18,25 +20,31 @@ site security policies.
 
 1. Create a project at supabase.com. Pick the **Mumbai (ap-south-1)** region so data stays in India.
 2. **SQL Editor** → paste `supabase/migrations/001_registrations.sql` → Run.
-3. **Authentication → Sign In / Providers**: turn **off** "Allow new users to sign up".
-   Admins are created by you only.
-4. **Authentication → Users → Add user**: create each admin (email + strong password),
-   then in SQL Editor:
-   ```sql
-   insert into public.admins (email) values ('admin@example.gov.in');
-   ```
-5. Deploy the function (needs the Supabase CLI):
+3. Deploy the two functions (needs the Supabase CLI):
    ```bash
    supabase login
    supabase link --project-ref YOUR-PROJECT-REF
    supabase secrets set ALLOWED_ORIGINS="https://www.THEIR-SITE.gov.in,https://THEIR-SITE.gov.in"
    supabase secrets set IP_HASH_SALT="$(openssl rand -hex 32)"
+   supabase secrets set ADMIN_PASSWORD="choose-a-long-password-12-or-more-characters"
    supabase functions deploy register --no-verify-jwt
+   supabase functions deploy admin --no-verify-jwt
    ```
+   (Or in the dashboard: **Edge Functions** → create `register` and `admin`, paste each
+   `index.ts`, turn **off** "Verify JWT" on both, and add the three secrets under
+   **Edge Functions → Secrets**.)
    While testing locally you can add `http://localhost:5500` (or whatever you use) to
    `ALLOWED_ORIGINS`, then remove it before going live.
 
-The function URL is `https://YOUR-PROJECT-REF.supabase.co/functions/v1/register`.
+**The admin login** is the username `admin` and whatever you set as `ADMIN_PASSWORD`.
+There is no Supabase Auth user, no email and no admins table. The password is a Supabase
+secret, so it never appears in the code or the page. It must be at least 12 characters;
+with a shorter one (or none) the admin function refuses everyone. To change the password,
+set the secret again; everyone is signed out. To use a different username, also set
+`ADMIN_USERNAME`.
+
+The registration URL is `https://YOUR-PROJECT-REF.supabase.co/functions/v1/register`
+and the admin URL is `https://YOUR-PROJECT-REF.supabase.co/functions/v1/admin`.
 
 ## 2. Landing page
 
@@ -93,9 +101,10 @@ landscape images around 1200 × 750, compressed to under 200 KB each.
 
 ## 3. Admin panel
 
-Set `SUPABASE_URL` and `SUPABASE_ANON_KEY` (Dashboard → Project Settings → API) in
-`admin/index.html`. Both are safe to publish: the database only returns rows to
-signed-in users on the `admins` list.
+Set one value, `FUNCTION_URL`, near the top of the script in `admin/index.html`
+(the admin URL above). Sign in with username `admin` and the `ADMIN_PASSWORD` you set.
+The page holds no keys and no password; it loads no outside scripts. Sessions last
+12 hours (and end when you press Sign out).
 
 Host it anywhere static (Netlify, Cloudflare Pages, GitHub Pages, or the client's own
 server). It's marked `noindex`. Features: totals per evening, search by name, email,
@@ -111,9 +120,12 @@ current filter.
   per network per hour, and the function only accepts requests from the origins in
   `ALLOWED_ORIGINS`. IP addresses are stored only as salted hashes.
 - **The pass** is drawn in the browser as a PNG: a tall, phone-screen pass on phones (big pass code to show at the gate) and a landscape, printable pass on larger screens. Nothing is emailed.
-  people). Nothing is emailed.
-- The database is locked with Row Level Security; the public can't read or write the
-  table directly.
+- **The database is closed to browsers.** Row Level Security is on, with no policies,
+  so nobody can read or write the table directly; only the two functions can.
+- **Admin sign-in protection**: the password is compared in constant time, every wrong
+  guess is answered one second late, 8 wrong guesses from one network block further
+  attempts for 15 minutes (best effort), and the function stays shut until a password of
+  12+ characters is set. Pick a long, unique password: that is the real protection.
 
 ## Free-tier limits to keep in mind
 

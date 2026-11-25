@@ -5,12 +5,11 @@
 // Secrets (Dashboard → Edge Functions → Secrets, or `supabase secrets set`):
 //   ALLOWED_ORIGINS  comma-separated, e.g. "https://www.example.gov.in,https://example.gov.in"
 //   IP_HASH_SALT     any long random string
-// SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are provided automatically.
+// SUPABASE_URL and the Supabase secret key are provided automatically.
 
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 
 const EVENT_DAYS = ["2026-12-04", "2026-12-05", "2026-12-06"];
-const MAX_ATTENDEES = 5;
 const RATE_LIMIT_PER_HOUR = 20; // per IP; generous because offices and colleges share IPs
 const MIN_FILL_MS = 2500;       // humans take longer than this to fill the form
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O, 1/I
@@ -18,9 +17,24 @@ const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O, 1/I
 const allowedOrigins = (Deno.env.get("ALLOWED_ORIGINS") ?? "")
   .split(",").map((s) => s.trim().replace(/\/$/, "")).filter(Boolean);
 
+// Supabase is replacing the old "service_role" key with "secret" keys (sb_secret_...).
+// Use the new key when the project has one, and fall back to the old variable otherwise,
+// so this works on newer and older projects alike.
+function secretKey(): string {
+  try {
+    const keys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
+    const key = keys["default"] ?? Object.values(keys)[0];
+    if (typeof key === "string" && key) return key;
+  } catch { /* variable missing or not JSON: use the old one */ }
+  const legacy = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (legacy) return legacy;
+  console.error("No Supabase secret key found in the function environment.");
+  return "no-key-configured";
+}
+
 const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  secretKey(),
   { auth: { persistSession: false } },
 );
 
@@ -66,7 +80,6 @@ function publicTicket(row: Record<string, unknown>, existing: boolean) {
     full_name: row.full_name,
     email: row.email,
     days: row.days,
-    attendees: row.attendees,
     created_at: row.created_at,
     existing,
   };
@@ -117,20 +130,11 @@ Deno.serve(async (req) => {
     return fail("Enter a 10-digit Indian mobile number.", 422, origin, "phone");
   }
 
-  const cityRaw = String(body.city ?? "").trim().replace(/\s+/g, " ");
-  if (cityRaw.length > 60) return fail("City name is too long.", 422, origin, "city");
-  const city = cityRaw || null;
-
   const days = Array.isArray(body.days) ? [...new Set(body.days.map(String))] : [];
   if (days.length < 1 || !days.every((d) => EVENT_DAYS.includes(d))) {
     return fail("Choose at least one evening.", 422, origin, "days");
   }
   days.sort();
-
-  const attendees = Number(body.attendees);
-  if (!Number.isInteger(attendees) || attendees < 1 || attendees > MAX_ATTENDEES) {
-    return fail(`Choose between 1 and ${MAX_ATTENDEES} people.`, 422, origin, "attendees");
-  }
 
   if (body.consent !== true) {
     return fail("Please agree to the use of your details to issue your invite.", 422, origin, "consent");
@@ -139,7 +143,7 @@ Deno.serve(async (req) => {
   // --- Already registered? Give the same pass back if the mobile number matches.
   const { data: existing, error: lookupError } = await supabase
     .from("registrations")
-    .select("ticket_code, full_name, email, phone, days, attendees, created_at")
+    .select("ticket_code, full_name, email, phone, days, created_at")
     .eq("email", email) // emails are always stored lowercased
     .maybeSingle();
 
@@ -172,8 +176,8 @@ Deno.serve(async (req) => {
   for (let attempt = 0; attempt < 4; attempt++) {
     const { data, error } = await supabase
       .from("registrations")
-      .insert({ ticket_code: ticketCode(), full_name: fullName, email, phone, city, days, attendees, ip_hash: ipHash })
-      .select("ticket_code, full_name, email, days, attendees, created_at")
+      .insert({ ticket_code: ticketCode(), full_name: fullName, email, phone, days, ip_hash: ipHash })
+      .select("ticket_code, full_name, email, days, created_at")
       .single();
 
     if (!error) return json(publicTicket(data, false), 201, origin);

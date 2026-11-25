@@ -5,3 +5,8 @@
 # The public form has no login, so the function does its own checks
 # (allowed origins, validation, rate limit) instead of requiring a JWT.
 verify_jwt = false
+
+[functions.admin]
+# The admin function does its own login check (username + password secret),
+# so Supabase's JWT check is switched off here too.
+verify_jwt = false

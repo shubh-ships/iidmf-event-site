@@ -33,7 +33,7 @@
   .login { max-width: 24rem; margin: 10vh auto 0; background: var(--paper); border: 1px solid var(--line); border-top: 6px solid var(--plum); border-radius: 12px; padding: 1.75rem; }
   .login h2 { margin: 0 0 1rem; font: 700 1.4rem Georgia, serif; color: var(--plum); }
   label { display: block; font-weight: 600; margin: .9rem 0 .3rem; }
-  input[type=email], input[type=password], input[type=search], select {
+  input[type=text], input[type=password], input[type=search], select {
     width: 100%; min-height: 2.6rem; padding: .45rem .7rem; border: 1.5px solid #cdbba6; border-radius: 8px; background: #fff; color: var(--ink);
   }
   .login .btn { width: 100%; margin-top: 1.25rem; }
@@ -54,7 +54,7 @@
 
   /* Table */
   .table-wrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; }
-  table { width: 100%; border-collapse: collapse; min-width: 60rem; }
+  table { width: 100%; border-collapse: collapse; min-width: 48rem; }
   th, td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { position: sticky; top: 0; background: #f6ecdf; font-size: .85rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
   tbody tr:hover { background: #fdf8f0; }
@@ -73,7 +73,7 @@
   <div class="bar">
     <h1>IIDMF 2026 · Registrations</h1>
     <div class="who" id="who" hidden>
-      <span id="whoEmail"></span>
+      <span id="whoName"></span>
       <button class="btn light" id="logout" type="button">Sign out</button>
     </div>
   </div>
@@ -83,8 +83,8 @@
 <section class="login" id="loginView" hidden>
   <h2>Sign in</h2>
   <form id="loginForm">
-    <label for="email">Email</label>
-    <input id="email" type="email" autocomplete="username" required>
+    <label for="username">Username</label>
+    <input id="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
     <label for="password">Password</label>
     <input id="password" type="password" autocomplete="current-password" required>
     <button class="btn" type="submit" id="loginBtn">Sign in</button>
@@ -96,10 +96,9 @@
 <main id="appView" hidden>
   <div class="stats" id="stats" aria-live="polite">
     <div class="stat"><b id="sRegs">–</b><span>Registrations</span></div>
-    <div class="stat"><b id="sPeople">–</b><span>People expected (all evenings)</span></div>
-    <div class="stat"><b id="sD1">–</b><span>People on Fri, 4 Dec</span></div>
-    <div class="stat"><b id="sD2">–</b><span>People on Sat, 5 Dec</span></div>
-    <div class="stat"><b id="sD3">–</b><span>People on Sun, 6 Dec</span></div>
+    <div class="stat"><b id="sD1">–</b><span>Registered for Fri, 4 Dec</span></div>
+    <div class="stat"><b id="sD2">–</b><span>Registered for Sat, 5 Dec</span></div>
+    <div class="stat"><b id="sD3">–</b><span>Registered for Sun, 6 Dec</span></div>
   </div>
 
   <div class="tools">
@@ -130,9 +129,7 @@
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Mobile</th>
-          <th scope="col">City</th>
           <th scope="col">Evenings</th>
-          <th scope="col">People</th>
           <th scope="col">Registered</th>
         </tr>
       </thead>
@@ -149,113 +146,94 @@
   </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (function () {
   'use strict';
 
-  // ====== Set these two values (both are safe to publish) ======
-  var SUPABASE_URL = 'https://YOUR-PROJECT-REF.supabase.co';
-  var SUPABASE_ANON_KEY = 'YOUR-ANON-OR-PUBLISHABLE-KEY';
-  // =============================================================
+  // ====== Set this one value ======
+  var FUNCTION_URL = 'https://ymoplljkdpqenexgxamt.supabase.co/functions/v1/admin';
+  // ================================
 
-  var PAGE_SIZE = 50;
-  var COLUMNS = 'ticket_code, full_name, email, phone, city, days, attendees, created_at';
   var DAY_SHORT = { '2026-12-04': 'Fri 4', '2026-12-05': 'Sat 5', '2026-12-06': 'Sun 6' };
-
-  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  var page = 0, total = 0, searchTimer = null;
+  var page = 0, total = 0, pageSize = 50, searchTimer = null, token = null;
+  try { token = sessionStorage.getItem('iidmf_admin_token'); } catch (e) { /* storage blocked: sign in each visit */ }
 
   function $(id) { return document.getElementById(id); }
   var fmtDate = new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata' });
 
-  /* ---------------- Auth ---------------- */
+  /* ---------------- Talking to the admin function ---------------- */
+  function call(payload) {
+    var body = Object.assign({ token: token }, payload);
+    return fetch(FUNCTION_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, status: res.status, data: data }; });
+      })
+      .catch(function () {
+        return { ok: false, status: 0, data: { error: 'Could not reach the server. Check your internet connection.' } };
+      });
+  }
+  function remember(name) {
+    try { sessionStorage.setItem('iidmf_admin_token', token); sessionStorage.setItem('iidmf_admin_user', name); } catch (e) { /* ignore */ }
+  }
+  function forget() {
+    token = null;
+    try { sessionStorage.removeItem('iidmf_admin_token'); sessionStorage.removeItem('iidmf_admin_user'); } catch (e) { /* ignore */ }
+  }
+  function endSession(msg) { forget(); $('rows').innerHTML = ''; showLogin(msg); }
+
+  /* ---------------- Sign in / out ---------------- */
   function showLogin(msg) {
     $('appView').hidden = true; $('who').hidden = true; $('loginView').hidden = false;
     $('loginMsg').textContent = msg || '';
   }
-  function showApp(session) {
+  function showApp(name) {
     $('loginView').hidden = true; $('appView').hidden = false; $('who').hidden = false;
-    $('whoEmail').textContent = session.user.email;
-    loadAll();
+    $('whoName').textContent = name || 'admin';
+    page = 0;
+    load(true);
   }
 
-  $('loginForm').addEventListener('submit', async function (e) {
+  $('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
     $('loginMsg').textContent = '';
     $('loginBtn').disabled = true; $('loginBtn').textContent = 'Signing in…';
-    var res = await sb.auth.signInWithPassword({ email: $('email').value.trim(), password: $('password').value });
-    $('loginBtn').disabled = false; $('loginBtn').textContent = 'Sign in';
-    if (res.error) { $('loginMsg').textContent = 'Wrong email or password.'; return; }
-    $('password').value = '';
-    showApp(res.data.session);
+    token = null;
+    var name = $('username').value.trim();
+    call({ action: 'login', username: name, password: $('password').value }).then(function (r) {
+      $('loginBtn').disabled = false; $('loginBtn').textContent = 'Sign in';
+      if (!r.ok || !r.data.token) { $('loginMsg').textContent = r.data.error || 'Could not sign in.'; return; }
+      token = r.data.token; remember(name);
+      $('password').value = '';
+      showApp(name);
+    });
   });
 
-  $('logout').addEventListener('click', async function () {
-    await sb.auth.signOut();
-    $('rows').innerHTML = '';
-    showLogin();
-  });
+  $('logout').addEventListener('click', function () { endSession(''); });
 
   /* ---------------- Data ---------------- */
-  function cleanSearch(v) {
-    // characters that would break the PostgREST filter syntax
-    return v.trim().replace(/[,()*%\\:"]/g, ' ').replace(/\s+/g, ' ').slice(0, 60);
-  }
-
-  function filtered(query) {
-    var q = cleanSearch($('q').value);
-    var day = $('day').value;
-    if (day) query = query.contains('days', [day]);
-    if (q) {
-      var digits = q.replace(/\D/g, '');
-      var parts = ['full_name.ilike.*' + q + '*', 'email.ilike.*' + q + '*', 'ticket_code.ilike.*' + q + '*'];
-      if (digits.length >= 3) parts.push('phone.ilike.*' + digits + '*');
-      query = query.or(parts.join(','));
-    }
-    return query;
-  }
-
-  async function loadStats() {
-    var res = await sb.rpc('registration_stats');
-    if (res.error) {
-      if (res.error.code === '42501') {
-        await sb.auth.signOut();
-        showLogin('This account isn’t on the admin list. Ask the site owner to add it.');
-        return false;
-      }
-      $('appMsg').textContent = 'Could not load totals: ' + res.error.message;
-      return true;
-    }
-    var s = res.data || {}, by = s.by_day || {};
+  function renderStats(s) {
+    var by = s.by_day || {};
     var n = function (x) { return Number(x || 0).toLocaleString('en-IN'); };
     $('sRegs').textContent = n(s.registrations);
-    $('sPeople').textContent = n(s.attendees);
     $('sD1').textContent = n(by['2026-12-04']);
     $('sD2').textContent = n(by['2026-12-05']);
     $('sD3').textContent = n(by['2026-12-06']);
-    return true;
   }
 
-  async function loadRows() {
+  function load(withStats) {
     $('appMsg').textContent = '';
-    var from = page * PAGE_SIZE;
-    var query = filtered(sb.from('registrations').select(COLUMNS, { count: 'exact' }))
-      .order('created_at', { ascending: false })
-      .range(from, from + PAGE_SIZE - 1);
-    var res = await query;
-    if (res.error) { $('appMsg').textContent = 'Could not load registrations: ' + res.error.message; return; }
-    total = res.count || 0;
-    render(res.data || []);
-    var last = Math.min(from + PAGE_SIZE, total);
-    $('pageInfo').textContent = total ? ('Showing ' + (from + 1) + '–' + last + ' of ' + total.toLocaleString('en-IN')) : '';
-    $('prev').disabled = page === 0;
-    $('next').disabled = last >= total;
-  }
-
-  async function loadAll() {
-    var ok = await loadStats();
-    if (ok) await loadRows();
+    return call({ action: 'list', q: $('q').value, day: $('day').value, page: page, stats: !!withStats }).then(function (r) {
+      if (r.status === 401) { endSession(r.data.error); return; }
+      if (!r.ok) { $('appMsg').textContent = r.data.error || 'Could not load registrations.'; return; }
+      var d = r.data;
+      total = d.total || 0; pageSize = d.page_size || 50;
+      if (d.stats) renderStats(d.stats);
+      render(d.rows || []);
+      var from = page * pageSize, last = Math.min(from + pageSize, total);
+      $('pageInfo').textContent = total ? ('Showing ' + (from + 1) + '–' + last + ' of ' + total.toLocaleString('en-IN')) : '';
+      $('prev').disabled = page === 0;
+      $('next').disabled = last >= total;
+    });
   }
 
   function cell(tr, text, cls) {
@@ -272,7 +250,7 @@
     tbody.innerHTML = '';
     if (!rows.length) {
       var tr = document.createElement('tr'), td = document.createElement('td');
-      td.colSpan = 8; td.className = 'empty';
+      td.colSpan = 6; td.className = 'empty';
       td.textContent = $('q').value || $('day').value ? 'No registrations match this search.' : 'No registrations yet. They’ll appear here as people sign up.';
       tr.appendChild(td); tbody.appendChild(tr);
       return;
@@ -283,9 +261,7 @@
       cell(tr, r.full_name);
       cell(tr, r.email);
       cell(tr, r.phone, 'nowrap');
-      cell(tr, r.city);
       cell(tr, daysText(r.days), 'nowrap');
-      cell(tr, r.attendees, 'num');
       cell(tr, fmtDate.format(new Date(r.created_at)), 'nowrap');
       tbody.appendChild(tr);
     });
@@ -293,45 +269,38 @@
 
   $('q').addEventListener('input', function () {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(function () { page = 0; loadRows(); }, 300);
+    searchTimer = setTimeout(function () { page = 0; load(false); }, 300);
   });
-  $('day').addEventListener('change', function () { page = 0; loadRows(); });
-  $('refresh').addEventListener('click', loadAll);
-  $('prev').addEventListener('click', function () { if (page > 0) { page--; loadRows(); } });
-  $('next').addEventListener('click', function () { page++; loadRows(); });
+  $('day').addEventListener('change', function () { page = 0; load(false); });
+  $('refresh').addEventListener('click', function () { load(true); });
+  $('prev').addEventListener('click', function () { if (page > 0) { page--; load(false); } });
+  $('next').addEventListener('click', function () { page++; load(false); });
 
-  /* ---------------- CSV export (current filters) ---------------- */
+  /* ---------------- CSV export (current search and evening) ---------------- */
   function csvCell(v) {
     var s = v == null ? '' : String(v);
     if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; // stop spreadsheet formula injection
     return '"' + s.replace(/"/g, '""') + '"';
   }
 
-  $('export').addEventListener('click', async function () {
+  $('export').addEventListener('click', function () {
     var btn = $('export');
     btn.disabled = true; btn.textContent = 'Preparing…';
     $('appMsg').textContent = '';
-    try {
-      var all = [], from = 0, chunk = 1000;
-      while (true) {
-        var res = await filtered(sb.from('registrations').select(COLUMNS))
-          .order('created_at', { ascending: true })
-          .range(from, from + chunk - 1);
-        if (res.error) throw res.error;
-        all = all.concat(res.data);
-        if (res.data.length < chunk) break;
-        from += chunk;
-      }
-      var header = ['Pass code', 'Name', 'Email', 'Mobile', 'City', 'Fri 4 Dec', 'Sat 5 Dec', 'Sun 6 Dec', 'People', 'Registered (IST)'];
+    call({ action: 'export', q: $('q').value, day: $('day').value }).then(function (r) {
+      btn.disabled = false; btn.textContent = 'Download CSV';
+      if (r.status === 401) { endSession(r.data.error); return; }
+      if (!r.ok) { $('appMsg').textContent = r.data.error || 'Could not export.'; return; }
+      var header = ['Pass code', 'Name', 'Email', 'Mobile', 'Fri 4 Dec', 'Sat 5 Dec', 'Sun 6 Dec', 'Registered (IST)'];
       var lines = [header.map(csvCell).join(',')];
-      all.forEach(function (r) {
-        var d = r.days || [];
+      (r.data.rows || []).forEach(function (row) {
+        var d = row.days || [];
         lines.push([
-          r.ticket_code, r.full_name, r.email, r.phone, r.city,
+          row.ticket_code, row.full_name, row.email, row.phone,
           d.indexOf('2026-12-04') > -1 ? 'Yes' : '',
           d.indexOf('2026-12-05') > -1 ? 'Yes' : '',
           d.indexOf('2026-12-06') > -1 ? 'Yes' : '',
-          r.attendees, fmtDate.format(new Date(r.created_at))
+          fmtDate.format(new Date(row.created_at))
         ].map(csvCell).join(','));
       });
       var blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
@@ -341,24 +310,21 @@
       a.download = 'iidmf-2026-registrations-' + stamp + ($('day').value ? '-' + $('day').value : '') + '.csv';
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
-    } catch (err) {
-      $('appMsg').textContent = 'Could not export: ' + (err.message || err);
-    } finally {
-      btn.disabled = false; btn.textContent = 'Download CSV';
-    }
+    });
   });
 
   /* ---------------- Start ---------------- */
-  if (SUPABASE_URL.indexOf('YOUR-PROJECT-REF') !== -1) {
-    showLogin('Set SUPABASE_URL and SUPABASE_ANON_KEY in this file first.');
+  if (FUNCTION_URL.indexOf('YOUR-PROJECT-REF') !== -1) {
+    showLogin('Set FUNCTION_URL in this file first.');
     return;
   }
-  sb.auth.getSession().then(function (r) {
-    if (r.data.session) showApp(r.data.session); else showLogin();
-  });
-  sb.auth.onAuthStateChange(function (event) {
-    if (event === 'SIGNED_OUT') showLogin();
-  });
+  if (token) {
+    var saved = 'admin';
+    try { saved = sessionStorage.getItem('iidmf_admin_user') || 'admin'; } catch (e) { /* ignore */ }
+    showApp(saved);
+  } else {
+    showLogin();
+  }
 })();
 </script>
 </body>
