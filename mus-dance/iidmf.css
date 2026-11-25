@@ -596,75 +596,20 @@
   text-shadow: 0 2px 8px rgba(15, 0, 45, .75);
 }
 
-/* Connect with ICCR strip (authentic poster footer) */
-.iidmf-hero__connect-bar {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .65rem;
-  margin: clamp(1.4rem, 2.5vw, 2rem) auto 0;
-  max-width: min(94vw, 56rem);
-  padding: clamp(.75rem, 1.8vw, 1.1rem) clamp(1rem, 2.5vw, 1.75rem);
-  background: rgba(26, 4, 48, 0.78);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(247, 41, 115, 0.75);
-  border-radius: 20px;
-  box-shadow: 0 10px 28px -6px rgba(0, 0, 0, .6), 0 0 20px -8px rgba(247, 41, 115, .35);
-  text-align: center;
-}
-
-.iidmf-hero__connect-pill {
-  display: inline-block;
-  background: rgba(247, 41, 115, 0.2);
-  border: 1px solid rgba(247, 41, 115, 0.55);
+/* Follow ICCR social media button */
+.iidmf-btn--social {
+  background: rgba(26, 4, 48, 0.82);
   color: #fff;
-  font-weight: 700;
-  font-size: clamp(.82rem, .76rem + .2vw, .94rem);
-  line-height: 1.45;
-  padding: .35rem clamp(.85rem, 2vw, 1.35rem);
-  border-radius: 999px;
-  text-align: center;
-  text-transform: none;
-  max-width: 44rem;
-  margin: 0 auto;
-  text-shadow: 0 1px 4px rgba(10, 0, 35, .8);
+  border: 1.5px solid rgba(247, 41, 115, 0.85);
+  box-shadow: 0 8px 22px -6px rgba(10, 0, 40, .7);
 }
 
-.iidmf-hero__connect-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: .75rem 1rem;
-  padding: .2rem .6rem;
-}
-
-.iidmf-hero__connect-item {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
+.iidmf-btn--social:hover {
+  background: var(--magenta);
   color: #fff;
-  text-decoration: none;
-  font-size: clamp(.78rem, .72rem + .2vw, .86rem);
-  font-weight: 700;
-  transition: color .2s, transform .2s;
-}
-
-.iidmf-hero__connect-item svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  flex-shrink: 0;
-  color: var(--sun);
-}
-
-.iidmf-hero__connect-item:hover,
-.iidmf-hero__connect-item:focus-visible {
-  color: var(--sun);
-  transform: translateY(-1px);
+  border-color: var(--sun);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -6px rgba(247, 41, 115, .6);
 }
 
 /* ---------- Intro band ---------- */
@@ -1725,24 +1670,6 @@
     font-size: .96rem;
     width: 100%;
     text-align: center;
-  }
-
-  .iidmf-hero__connect-bar {
-    border-radius: 18px;
-    padding: .85rem .75rem;
-    width: 100%;
-    gap: .65rem;
-  }
-
-  .iidmf-hero__connect-pill {
-    border-radius: 12px;
-    padding: .4rem .75rem;
-    font-size: .84rem;
-    line-height: 1.4;
-  }
-
-  .iidmf-hero__connect-links {
-    gap: .5rem .8rem;
   }
 
   .iidmf-band__lede {
