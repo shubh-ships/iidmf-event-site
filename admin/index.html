@@ -201,7 +201,12 @@
     var name = $('username').value.trim();
     call({ action: 'login', username: name, password: $('password').value }).then(function (r) {
       $('loginBtn').disabled = false; $('loginBtn').textContent = 'Sign in';
-      if (!r.ok || !r.data.token) { $('loginMsg').textContent = r.data.error || 'Could not sign in.'; return; }
+      if (!r.ok || !r.data.token) {
+        // a reply with no "error" field did not come from the login code: the platform turned it away
+        $('loginMsg').textContent = r.data.error ||
+          ('The login service did not answer correctly (HTTP ' + r.status + '). In Supabase, check that the admin function is deployed and that JWT verification is switched off for it.');
+        return;
+      }
       token = r.data.token; remember(name);
       $('password').value = '';
       showApp(name);

@@ -543,8 +543,8 @@
   .iidmf-pill:nth-child(3) { justify-self: stretch; }
   .iidmf-band__lede { font-size: 1rem; }
 
-  /* hero CTAs: two side by side under the title; directions move down next to the venue */
-  .iidmf-hero__actions { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .9rem; }
+  /* hero CTAs: stacked full-width under the title */
+  .iidmf-hero__actions { display: grid; grid-template-columns: 1fr; gap: .5rem; margin-top: .9rem; }
   .iidmf-hero__actions .iidmf-btn { padding-inline: .5rem; font-size: .95rem; }
   .iidmf-band__lede { text-align: left; }
 
